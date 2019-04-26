@@ -1,0 +1,7 @@
+base
+knitr
+rmdformats
+readxl
+dplyr
+kableExtra
+formattable

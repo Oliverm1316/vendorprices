@@ -1,0 +1,10 @@
+name: "my-website"
+navbar:
+  title: "CE Events Prices"
+  left:
+    - text: "Guides"
+      href: index.html
+    - text: "Restaurants"
+      href: about.html
+  
+  

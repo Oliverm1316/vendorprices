@@ -1,0 +1,103 @@
+---
+title: <br><br><center>GUIDE AND FREELANCE RATES <center>
+author: "Oliver Martinez"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::readthedown:
+    highlight: kate
+---
+
+<script> 
+    $(document).ready(function() { 
+    $head = $('#header'); 
+    $head.prepend('<A href = https://www.cuttingedge-events.com><img src ="LOGO.png" width="150" vspace="50" align="right"></A>') 
+    }); 
+</script> 
+
+```{r knitr_init, echo=FALSE, cache=FALSE, message= FALSE,warning=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=750)
+```
+
+
+```{r echo=FALSE, message=FALSE,warning=FALSE}
+library(readxl)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+```
+
+
+## **COMUNITAT VALENCIANA** {.tabset .tabset-fade .tabset-pills}
+
+### ALICANTE
+
+### VALENCIA
+
+## **CATALUNYA** {.tabset .tabset-fade .tabset-pills}
+
+### BARCELONA
+
+<br>
+
+```{r echo=FALSE, message=FALSE,warning=FALSE}
+
+guides <- read_excel("vendorprices.xlsx", sheet = "GUIDES")
+bcnguides <- guides[guides$CITY == "BCN",]
+bcnguides[is.na(bcnguides)] <- " "
+bcnguides$RATE <- paste('€',formatC(bcnguides$RATE, big.mark=','))
+
+bcnguides %>% select(NAME,1,3:ncol(bcnguides)) %>% kable(escape = T) %>% 
+kable_styling(bootstrap_options = c("striped","condensed","hover"), full_width = T, fixed_thead = T) %>% 
+  row_spec(0, bold = T, background = "#FF8000", color = "white")
+
+```
+
+
+### GIRONA
+
+## **CENTRO** {.tabset .tabset-fade .tabset-pills}
+
+### MADRID
+
+### SALAMANCA
+
+## **ANDALUSIA** {.tabset .tabset-fade .tabset-pills}
+
+### MALAGA
+
+### GRANADA
+
+<br>
+
+```{r echo=FALSE, message=FALSE,warning=FALSE}
+
+guides <- read_excel("vendorprices.xlsx", sheet = "GUIDES")
+graguides <- guides[guides$CITY == "GRA",]
+graguides[is.na(graguides)] <- " "
+graguides$RATE <- paste('€',formatC(graguides$RATE, big.mark=','))
+
+graguides %>% select(NAME,1,3:ncol(graguides)) %>% kable(escape = T) %>% 
+kable_styling(bootstrap_options = c("striped","condensed","hover"), full_width = T, fixed_thead = T) %>% 
+  row_spec(0, bold = T, background = "#FF8000", color = "white")
+
+```
+
+### CORDOBA
+
+## **PORTUGAL** {.tabset .tabset-fade .tabset-pills}
+
+### LISBOA
+
+### PORTO

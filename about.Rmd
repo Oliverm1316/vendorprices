@@ -1,0 +1,143 @@
+---
+title: <br><br><center>Vendor Prices <center>
+author: "Oliver Martinez"
+date: "`r Sys.Date()`"
+output:
+  rmdformats::readthedown:
+    highlight: kate
+---
+
+<script> 
+    $(document).ready(function() { 
+    $head = $('#header'); 
+    $head.prepend('<A href = https://www.cuttingedge-events.com><img src ="LOGO.png" width="150" vspace="50" align="right"></A>') 
+    }); 
+</script> 
+
+```{r knitr_init, echo=FALSE, cache=FALSE, message= FALSE,warning=FALSE}
+library(knitr)
+library(rmdformats)
+
+## Global options
+options(max.print="75")
+opts_chunk$set(echo=FALSE,
+	             cache=TRUE,
+               prompt=FALSE,
+               tidy=TRUE,
+               comment=NA,
+               message=FALSE,
+               warning=FALSE)
+opts_knit$set(width=750)
+```
+
+
+
+## ALICANTE
+
+## BARCELONA
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover(); 
+});
+</script>
+
+```{r echo=FALSE, message=FALSE,warning=FALSE}
+library(readxl)
+library(dplyr)
+library(knitr)
+library(kableExtra)
+library(formattable)
+
+menus <- read_excel("vendorprices.xlsx", sheet = "RESTPRICES")
+bcnmenus <- menus[menus$CITY=="BCN",] 
+bcnmenus$MENU.MIN <- paste('€',formatC(bcnmenus$MENU.MIN, big.mark=','))
+bcnmenus[is.na(bcnmenus)] <- " "
+bcnmenus$DESCRIPTION <- as.character(bcnmenus$DESCRIPTION)
+
+bcnmenus %>% mutate(
+  VENDOR = cell_spec(VENDOR, popover = spec_popover(content = bcnmenus$DESCRIPTION, trigger = "click")),
+  MENU.MIN = color_bar("lightgreen")(MENU.MIN),
+  WINE = ifelse(WINE =="INCL",cell_spec(WINE,color = "green",bold = T, popover = spec_popover(content = bcnmenus$QWINE)),
+                cell_spec(WINE, color = "red", bold = T)),
+  BEER = ifelse(BEER =="INCL",cell_spec(BEER,color = "green",bold = T),
+                cell_spec(BEER, color = "red", bold = T)),
+  COFFEE = ifelse(COFFEE =="INCL",cell_spec(COFFEE,color = "green", bold = T), cell_spec(COFFEE, color = "red", bold = T)),
+  IMG = ifelse(IMG =="YES",cell_spec(IMG,color = "green",bold = T), 
+        cell_spec(IMG, color = "red", bold = T))
+  ) %>% 
+  select(VENDOR, c(3:7,9:12)) %>% 
+  
+  kable(escape = F) %>% kable_styling(bootstrap_options = c("striped","condensed","hover"), full_width = T, fixed_thead = T) %>% 
+  row_spec(0, bold = T, background = "#FF8000", color = "white") %>% 
+  column_spec(2,width = "1cm") %>% column_spec(9,width_min = "4cm") 
+  
+```
+
+## LISBOA
+
+## MADRID
+
+```{r echo=FALSE, message=FALSE,warning=FALSE}
+
+menus <- read_excel("vendorprices.xlsx", sheet = "RESTPRICES")
+madmenus <- menus[menus$CITY=="MAD",] 
+madmenus$MENU.MIN <- paste('€',formatC(madmenus$MENU.MIN, big.mark=','))
+madmenus[is.na(madmenus)] <- " "
+madmenus$DESCRIPTION <- as.character(madmenus$DESCRIPTION)
+
+madmenus %>% mutate(
+  VENDOR = cell_spec(VENDOR, popover = spec_popover(content = madmenus$DESCRIPTION, trigger = "click")),
+  MENU.MIN = color_bar("lightgreen")(MENU.MIN),
+  WINE = ifelse(WINE =="INCL",cell_spec(WINE,color = "green",bold = T, popover = spec_popover(content = madmenus$QWINE)),
+                cell_spec(WINE, color = "red", bold = T)),
+  BEER = ifelse(BEER =="INCL",cell_spec(BEER,color = "green",bold = T),
+                cell_spec(BEER, color = "red", bold = T)),
+  COFFEE = ifelse(COFFEE =="INCL",cell_spec(COFFEE,color = "green", bold = T), cell_spec(COFFEE, color = "red", bold = T)),
+  IMG = ifelse(IMG =="YES",cell_spec(IMG,color = "green",bold = T), 
+        cell_spec(IMG, color = "red", bold = T))
+  ) %>% 
+  select(VENDOR, c(3:7,9:12)) %>% 
+  
+  kable(escape = F) %>% kable_styling(bootstrap_options = c("striped","condensed","hover"), full_width = T, fixed_thead = T) %>% 
+  row_spec(0, bold = T, background = "#FF8000", color = "white") %>% 
+  column_spec(2,width = "1cm") %>% column_spec(9,width_min = "4cm") 
+  
+```
+
+## MALAGA
+
+
+## VALENCIA
+
+```{r echo=FALSE, message=FALSE,warning=FALSE}
+
+menus <- read_excel("vendorprices.xlsx", sheet = "RESTPRICES")
+vlcmenus <- menus[menus$CITY=="VLC",] 
+vlcmenus$MENU.MIN <- paste('€',formatC(vlcmenus$MENU.MIN, big.mark=','))
+vlcmenus[is.na(vlcmenus)] <- " "
+vlcmenus$DESCRIPTION <- as.character(vlcmenus$DESCRIPTION)
+
+vlcmenus %>% mutate(
+  VENDOR = cell_spec(VENDOR, popover = spec_popover(content = vlcmenus$DESCRIPTION, trigger = "click")),
+  MENU.MIN = color_bar("lightgreen")(MENU.MIN),
+  WINE = ifelse(WINE =="INCL",cell_spec(WINE,color = "green",bold = T, popover = spec_popover(content = vlcmenus$QWINE)),
+                cell_spec(WINE, color = "red", bold = T)),
+  BEER = ifelse(BEER =="INCL",cell_spec(BEER,color = "green",bold = T),
+                cell_spec(BEER, color = "red", bold = T)),
+  COFFEE = ifelse(COFFEE =="INCL",cell_spec(COFFEE,color = "green", bold = T), cell_spec(COFFEE, color = "red", bold = T)),
+  IMG = ifelse(IMG =="YES",cell_spec(IMG,color = "green",bold = T), 
+        cell_spec(IMG, color = "red", bold = T))
+  ) %>% 
+  select(VENDOR, c(3:7,9:12)) %>% 
+  
+  kable(escape = F) %>% kable_styling(bootstrap_options = c("striped","condensed","hover"), full_width = T, fixed_thead = T) %>% 
+  row_spec(0, bold = T, background = "#FF8000", color = "white") %>% 
+  column_spec(2,width = "1cm") %>% column_spec(9,width_min = "4cm")  
+
+```
+
+
+  
+
+
